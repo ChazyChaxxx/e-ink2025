@@ -1,0 +1,1 @@
+Projet ESPHome pour cadre e-ink avec ESP32 et écran Waveshare.
