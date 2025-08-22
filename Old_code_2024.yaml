@@ -1,3 +1,4 @@
+
 esphome:
   name: epaper-esp32
 
@@ -255,7 +256,6 @@ display:
     dc_pin: 27
     busy_pin: 25
     reset_pin: 26
-    reset_duration: 2ms
     model: 7.50inv2
     rotation: 270°
     update_interval: 900s

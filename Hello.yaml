@@ -1,0 +1,44 @@
+# code hyper minimaliste qui doit afficher uniquement "hello" pour tester l'appareil.
+esphome:
+  name: epaper_minimal
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip:
+    static_ip: 192.168.129.105
+    gateway: 192.168.128.1
+    subnet: 255.255.254.0
+
+logger:
+api:
+ota:
+  platform: esphome  # <-- nécessaire maintenant
+
+spi:
+  clk_pin: 13
+  mosi_pin: 14
+
+font:
+  - file: "epaper/GothamRnd-Book.ttf"
+    id: book20
+    size: 20
+    glyphs: ['H','e','l','o',' ']
+
+display:
+  - platform: waveshare_epaper
+    id: eink_display
+    cs_pin: 15  # <-- strapping pin warning, juste un avertissement
+    dc_pin: 27
+    busy_pin: 25
+    reset_pin: 26
+    model: 7.50inV2
+    rotation: 270°
+    update_interval: 60s
+    lambda: |-
+      it.printf(50, 50, id(book20), TextAlign::TOP_LEFT, "Hello");
