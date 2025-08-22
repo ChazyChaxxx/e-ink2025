@@ -1,8 +1,12 @@
 esphome:
   name: epaper-esp32
-  platform: ESP32
+
+esp32:
   board: esp32dev
-  on_boot:
+  framework:
+    type: arduino
+
+on_boot:
   - delay: 50s
   - script.execute: update_screen
 
@@ -25,7 +29,7 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-   key: "dAu06PT2G0PZ6FCQUpaWYH411QbTYksSxkdUriED7i4="
+   key: "0BJDjGpWCIL61ml0Kfad45/0zvhH7jTkgR+HL6LO+fs="
 
 
 ota:
