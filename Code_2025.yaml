@@ -162,7 +162,15 @@ text_sensor:
   - platform: homeassistant
     entity_id: sensor.mealie_today_name
     id: plat_du_jour
-
+  - platform: homeassistant
+    entity_id: sensor.papiers_cartons
+    id: carton_date
+  - platform: homeassistant
+    entity_id: sensor.pmc
+    id: pmc_date
+  - platform: homeassistant
+    entity_id: sensor.verre
+    id: verre_date
 
 display:
   - platform: waveshare_epaper
@@ -176,9 +184,12 @@ display:
     update_interval: 60s
     lambda: |-
       it.printf(240, 15, id(bold35), TextAlign::TOP_CENTER, "%s", id(date_fr_complete).state.c_str());
-      it.filled_rectangle(50, 50, 380, 3);
+      it.filled_rectangle(50, 50, 400, 3);
       it.printf(240, 80, id(book20), TextAlign::TOP_CENTER, "Plat du jour : %s", id(plat_du_jour).state.c_str());
       it.filled_rectangle(50, 408, 380, 2);
+      it.printf(20, 425, id(book20), TextAlign::TOP_LEFT, "PMC : %s", id(pmc_date).state.c_str());
+      it.printf(20, 450, id(book20), TextAlign::TOP_LEFT, "Cartons : %s", id(carton_date).state.c_str());
+      it.printf(20, 475, id(book20), TextAlign::TOP_LEFT, "Verres : %s", id(verre_date).state.c_str());
       it.filled_rectangle(50, 660, 380, 2);
       it.filled_rectangle(50, 720, 380, 2);
       it.printf(250, 785, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
