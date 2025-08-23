@@ -154,6 +154,9 @@ sensor:
     entity_id: weather.pont_a_celles
     attribute: temperature
     id: weather_temperature
+  - platform: homeassistant
+    entity_id: counter.compteur_de_vidage_du_puit
+    id: compteur_vidage
 
 text_sensor: 
   - platform: homeassistant
@@ -181,11 +184,13 @@ display:
     reset_pin: 26
     model: 7.50inV2
     rotation: 270°
-    update_interval: 60s
+    update_interval: 180s
     lambda: |-
       it.printf(240, 15, id(bold35), TextAlign::TOP_CENTER, "%s", id(date_fr_complete).state.c_str());
       it.filled_rectangle(50, 50, 400, 3);
-      it.printf(240, 80, id(book20), TextAlign::TOP_CENTER, "Plat du jour : %s", id(plat_du_jour).state.c_str());
+      it.printf(240, 75, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :");
+      it.printf(240, 110, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
+      it.printf(240, 130, id(book20), TextAlign::TOP_CENTER, "Compteur : %d", (int)id(compteur_vidage).state);
       it.filled_rectangle(50, 408, 380, 2);
       it.printf(20, 425, id(book20), TextAlign::TOP_LEFT, "PMC : %s", id(pmc_date).state.c_str());
       it.printf(20, 450, id(book20), TextAlign::TOP_LEFT, "Cartons : %s", id(carton_date).state.c_str());
