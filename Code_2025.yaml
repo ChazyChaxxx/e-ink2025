@@ -157,6 +157,9 @@ sensor:
   - platform: homeassistant
     entity_id: counter.compteur_de_vidage_du_puit
     id: compteur_vidage
+  - platform: homeassistant
+    entity_id: sensor.compteur_d_eau
+    id: compteur_d_eau
 
 text_sensor: 
   - platform: homeassistant
@@ -178,7 +181,7 @@ text_sensor:
 display:
   - platform: waveshare_epaper
     id: eink_display
-    cs_pin: 15  # <-- strapping pin warning, juste un avertissement
+    cs_pin: 15
     dc_pin: 27
     busy_pin: 25
     reset_pin: 26
@@ -188,14 +191,15 @@ display:
     lambda: |-
       it.printf(240, 15, id(bold35), TextAlign::TOP_CENTER, "%s", id(date_fr_complete).state.c_str());
       it.filled_rectangle(50, 50, 400, 3);
-      it.printf(240, 75, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :");
-      it.printf(240, 110, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
-      it.printf(240, 130, id(book20), TextAlign::TOP_CENTER, "Compteur : %d", (int)id(compteur_vidage).state);
+      it.printf(240, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :");
+      it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
+      it.printf(240, 120, id(book20), TextAlign::TOP_CENTER, "Vidage de la cave : %d", (int)id(compteur_vidage).state);
       it.filled_rectangle(50, 408, 380, 2);
       it.printf(20, 425, id(book20), TextAlign::TOP_LEFT, "PMC : %s", id(pmc_date).state.c_str());
       it.printf(20, 450, id(book20), TextAlign::TOP_LEFT, "Cartons : %s", id(carton_date).state.c_str());
       it.printf(20, 475, id(book20), TextAlign::TOP_LEFT, "Verres : %s", id(verre_date).state.c_str());
-      it.filled_rectangle(50, 660, 380, 2);
-      it.filled_rectangle(50, 720, 380, 2);
+      it.filled_rectangle(50, 500, 380, 2);
+      it.printf(50, 515, id(book20), TextAlign::TOP_LEFT, "%.1f litres", id(compteur_d_eau).state);
+      it.print(20, 509, id(mdi36), TextAlign::TOP_CENTER, "\U000F058C");
       it.printf(250, 785, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
       it.strftime(255, 785, id(bold15), TextAlign::TOP_LEFT, "%d-%m-%Y %H:%M", id(sntp_time).now());
