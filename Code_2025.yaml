@@ -136,8 +136,10 @@ font:
       - "\U000F0A70" # mdi-silverware-fork-knife
       - "\U000F1A74" # mdi-solar-power-variant-outline
       - "\U000F1904" # mdi-home-lightning-bolt-outline
-      - "\U000F058C" # mdi-water
+      - "\U000F0E0A" # mdi-water
       - "\U000F0238" # mdi-fire
+      - "\U000F0A7A" # mdi-trash
+      - "\U000F0A72" # mdi-solar-prod
 
 
   - file: 'epaper/materialdesignicons-webfont.ttf'
@@ -160,6 +162,9 @@ sensor:
   - platform: homeassistant
     entity_id: sensor.compteur_d_eau
     id: compteur_d_eau
+  - platform: homeassistant
+    entity_id: sensor.kiosk_fusion_solar_2025_0pi5kpb8ji7853vmxnvqzlzfkzi0qqur_total_current_day_energy
+    id: prod_solaire_jour
 
 text_sensor: 
   - platform: homeassistant
@@ -186,20 +191,25 @@ display:
     busy_pin: 25
     reset_pin: 26
     model: 7.50inV2
-    rotation: 270°
+    rotation: 270° #Résolution écran 480x800
     update_interval: 180s
     lambda: |-
-      it.printf(240, 15, id(bold35), TextAlign::TOP_CENTER, "%s", id(date_fr_complete).state.c_str());
+      it.strftime(240, 15, id(bold35), TextAlign::TOP_CENTER, "%d-%m-%Y", id(sntp_time).now());
       it.filled_rectangle(50, 50, 400, 3);
       it.printf(240, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :");
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
       it.printf(240, 120, id(book20), TextAlign::TOP_CENTER, "Vidage de la cave : %d", (int)id(compteur_vidage).state);
-      it.filled_rectangle(50, 408, 380, 2);
+      it.filled_rectangle(50, 385, 380, 2);
+      it.print(168, 390, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A");
+      it.printf(240, 400, id(bold20), TextAlign::TOP_CENTER, "Poubelles :");
       it.printf(20, 425, id(book20), TextAlign::TOP_LEFT, "PMC : %s", id(pmc_date).state.c_str());
       it.printf(20, 450, id(book20), TextAlign::TOP_LEFT, "Cartons : %s", id(carton_date).state.c_str());
       it.printf(20, 475, id(book20), TextAlign::TOP_LEFT, "Verres : %s", id(verre_date).state.c_str());
       it.filled_rectangle(50, 500, 380, 2);
       it.printf(50, 515, id(book20), TextAlign::TOP_LEFT, "%.1f litres", id(compteur_d_eau).state);
-      it.print(20, 509, id(mdi36), TextAlign::TOP_CENTER, "\U000F058C");
+      it.print(20, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0E0A");
+      it.filled_rectangle(240, 500, 2, 100);
+      it.print(260, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A72);
+      it.printf(290, 515, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(prod_solaire_jour).state);
       it.printf(250, 785, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
       it.strftime(255, 785, id(bold15), TextAlign::TOP_LEFT, "%d-%m-%Y %H:%M", id(sntp_time).now());
