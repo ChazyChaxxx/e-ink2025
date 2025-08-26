@@ -140,6 +140,12 @@ font:
       - "\U000F0238" # mdi-fire
       - "\U000F0A7A" # mdi-trash
       - "\U000F0A72" # mdi-solar-prod
+      - "\U000F192C" # mdi-import-energy
+      - "\U000F192D" # mdi-export_energie
+      - "\U000F1A1B" # mdi-gas-burner
+      - "\U000F140B" # mdi-energy
+      - "\U000F09B8" # mdi-arrow-left
+      - "\U000F09BA" # mdi-arrow-right
 
 
   - file: 'epaper/materialdesignicons-webfont.ttf'
@@ -165,6 +171,18 @@ sensor:
   - platform: homeassistant
     entity_id: sensor.kiosk_fusion_solar_2025_0pi5kpb8ji7853vmxnvqzlzfkzi0qqur_total_current_day_energy
     id: prod_solaire_jour
+  - platform: homeassistant
+    entity_id: sensor.gazmeter_epaper_25
+    id: gasmeter
+  - platform: homeassistant
+    entity_id: sensor.conso_generale_quotidienne_epaper_25
+    id: conso_elec_quoti
+  - platform: homeassistant
+    entity_id: sensor.elec_epaper_25
+    id: import_energie
+  - platform: homeassistant
+    entity_id: sensor.export_energie_epaper_25
+    id: export_energie
 
 text_sensor: 
   - platform: homeassistant
@@ -208,8 +226,14 @@ display:
       it.filled_rectangle(50, 500, 380, 2);
       it.printf(50, 515, id(book20), TextAlign::TOP_LEFT, "%.1f litres", id(compteur_d_eau).state);
       it.print(20, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0E0A");
+      it.printf(50, 535, id(book20), TextAlign::TOP_LEFT, "%.1f m3", id(gasmeter).state);
+      it.print(20, 515, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A1B");
+      it.printf(50, 555, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(conso_elec_quoti).state);
+      it.print(20, 525, id(mdi36), TextAlign::TOP_CENTER, "\U000F140B");
       it.filled_rectangle(240, 500, 2, 100);
-      it.print(260, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A72);
+      it.print(260, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A72");
       it.printf(290, 515, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(prod_solaire_jour).state);
+      it.print(310, 525, id(mdi36), TextAlign::TOP_CENTER, "\U000F09B8");
+      it.print(332, 525, id(mdi36), TextAlign::TOP_CENTER, "\U000F09BA");
       it.printf(250, 785, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
       it.strftime(255, 785, id(bold15), TextAlign::TOP_LEFT, "%d-%m-%Y %H:%M", id(sntp_time).now());
