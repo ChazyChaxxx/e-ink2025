@@ -186,6 +186,9 @@ sensor:
   - platform: homeassistant
     entity_id: sensor.export_energie_epaper_25
     id: export_energie
+  - platform: homeassistant
+    entity_id: sensor.autoconsommation_epaper_25
+    id: autoconsommation
 
 text_sensor: 
   - platform: homeassistant
@@ -224,24 +227,28 @@ display:
       it.filled_rectangle(50, 370, 380, 2);
       it.print(168, 380, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
       it.printf(240, 390, id(bold20), TextAlign::TOP_CENTER, "Poubelles :");
-      it.printf(20, 425, id(book20), TextAlign::TOP_LEFT, "Organiques : %s", id(dechets_organiques_date).state.c_str());
-      it.printf(20, 450, id(book20), TextAlign::TOP_LEFT, "PMC : %s", id(pmc_date).state.c_str());
-      it.printf(290, 425, id(book20), TextAlign::TOP_LEFT, "Cartons : %s", id(carton_date).state.c_str());
-      it.printf(290, 450, id(book20), TextAlign::TOP_LEFT, "Verres : %s", id(verre_date).state.c_str());
-      it.filled_rectangle(50, 480, 380, 2); // ligne horizontale pour le tableau
+      it.print(20, 415, id(mdi36), TextAlign::TOP_CENTER, "\U000F1906"); //picto leaf
+      it.print(20, 440, id(mdi36), TextAlign::TOP_CENTER, "\U000F1363"); //picto bottle plastic
+      it.print(260, 415, id(mdi36), TextAlign::TOP_CENTER, "\U000F03D6"); //picto cardboard
+      it.print(260, 440, id(mdi36), TextAlign::TOP_CENTER, "\U000F1873"); //picto glass
+      it.printf(50, 425, id(book20), TextAlign::TOP_LEFT, "%s", id(dechets_organiques_date).state.c_str()); //organique
+      it.printf(50, 450, id(book20), TextAlign::TOP_LEFT, "%s", id(pmc_date).state.c_str()); //pmc
+      it.printf(290, 425, id(book20), TextAlign::TOP_LEFT, "%s", id(carton_date).state.c_str()); //carton
+      it.printf(290, 450, id(book20), TextAlign::TOP_LEFT, "%s", id(verre_date).state.c_str()); //verre
+      it.filled_rectangle(50, 490, 380, 2); // ligne horizontale pour le tableau
       it.printf(50, 515, id(book20), TextAlign::TOP_LEFT, "%.1f litres", id(compteur_d_eau).state);
       it.print(20, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0E0A"); //picto eau
-      it.printf(50, 547, id(book20), TextAlign::TOP_LEFT, "%.1f m3", id(gasmeter).state);
+      it.printf(50, 553, id(book20), TextAlign::TOP_LEFT, "%.1f m3", id(gasmeter).state);
       it.print(20, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A1B"); //picto gaz
-      it.printf(50, 580, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(conso_elec_quoti).state);
+      it.printf(50, 585, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(conso_elec_quoti).state);
       it.print(20, 575, id(mdi36), TextAlign::TOP_CENTER, "\U000F140B"); //picto conso elec
-      it.filled_rectangle(240, 480, 2, 100); // ligne verticale pour le tableau
+      it.filled_rectangle(240, 490, 2, 100); // ligne verticale pour le tableau
       it.print(260, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A72"); //picto prod solaire
-      it.printf(290, 515, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(prod_solaire_jour).state);
-      it.print(310, 525, id(mdi36), TextAlign::TOP_CENTER, "\U000F09B8");  //picto gauche
-      it.print(340, 525, id(mdi36), TextAlign::TOP_CENTER, "\U000F09BA"); //picto droite
-      it.printf(275, 575, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(import_energie).state);
-      it.printf(335, 575, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(export_energie).state);
-      it.printf(240, 595, id(book20), TextAlign::TOP_CENTER, "Vidage de la cave : %d", (int)id(compteur_vidage).state);
+      it.printf(290, 515, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(prod_solaire_jour).state);
+      it.print(310, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F09B8");  //picto gauche
+      it.print(340, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F09BA"); //picto droite
+      it.printf(265, 590, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(autoconsommation).state);
+      it.printf(370, 590, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(export_energie).state);
+      it.printf(240, 620, id(book20), TextAlign::TOP_CENTER, "Vidage de la cave : %d", (int)id(compteur_vidage).state);
       it.printf(250, 785, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
       it.strftime(255, 785, id(bold15), TextAlign::TOP_LEFT, "%d-%m-%Y %H:%M", id(sntp_time).now());
