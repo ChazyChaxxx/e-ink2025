@@ -137,7 +137,6 @@ font:
       - "\U000F1A74" # mdi-solar-power-variant-outline
       - "\U000F1904" # mdi-home-lightning-bolt-outline
       - "\U000F0E0A" # mdi-water
-      - "\U000F0238" # mdi-fire
       - "\U000F0A7A" # mdi-trash
       - "\U000F0A72" # mdi-solar-prod
       - "\U000F192C" # mdi-import-energy
@@ -146,6 +145,10 @@ font:
       - "\U000F140B" # mdi-energy
       - "\U000F09B8" # mdi-arrow-left
       - "\U000F09BA" # mdi-arrow-right
+      - "\U000F1906" # mdi-leaf
+      - "\U000F1363" # mdi-bottle-plastic
+      - "\U000F03D6" # mdi-cardboard
+      - "\U000F1873" # mdi-glass
 
 
   - file: 'epaper/materialdesignicons-webfont.ttf'
@@ -218,25 +221,27 @@ display:
       it.filled_rectangle(50, 50, 400, 3); // ligne horizontale 
       it.printf(240, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :");
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
-      it.filled_rectangle(50, 385, 380, 2);
-      it.print(168, 390, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
-      it.printf(240, 400, id(bold20), TextAlign::TOP_CENTER, "Poubelles :");
+      it.filled_rectangle(50, 370, 380, 2);
+      it.print(168, 380, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
+      it.printf(240, 390, id(bold20), TextAlign::TOP_CENTER, "Poubelles :");
       it.printf(20, 425, id(book20), TextAlign::TOP_LEFT, "Organiques : %s", id(dechets_organiques_date).state.c_str());
       it.printf(20, 450, id(book20), TextAlign::TOP_LEFT, "PMC : %s", id(pmc_date).state.c_str());
       it.printf(290, 425, id(book20), TextAlign::TOP_LEFT, "Cartons : %s", id(carton_date).state.c_str());
       it.printf(290, 450, id(book20), TextAlign::TOP_LEFT, "Verres : %s", id(verre_date).state.c_str());
-      it.filled_rectangle(50, 470, 380, 2); // ligne horizontale pour le tableau
+      it.filled_rectangle(50, 480, 380, 2); // ligne horizontale pour le tableau
       it.printf(50, 515, id(book20), TextAlign::TOP_LEFT, "%.1f litres", id(compteur_d_eau).state);
       it.print(20, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0E0A"); //picto eau
-      it.printf(50, 535, id(book20), TextAlign::TOP_LEFT, "%.1f m3", id(gasmeter).state);
-      it.print(20, 545, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A1B"); //picto gaz
-      it.printf(50, 555, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(conso_elec_quoti).state);
-      it.print(20, 565, id(mdi36), TextAlign::TOP_CENTER, "\U000F140B"); //picto conso elec
-      it.filled_rectangle(240, 470, 2, 100); // ligne verticale pour le tableau
-      it.print(260, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A72"); //picto solaire
+      it.printf(50, 547, id(book20), TextAlign::TOP_LEFT, "%.1f m3", id(gasmeter).state);
+      it.print(20, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A1B"); //picto gaz
+      it.printf(50, 580, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(conso_elec_quoti).state);
+      it.print(20, 575, id(mdi36), TextAlign::TOP_CENTER, "\U000F140B"); //picto conso elec
+      it.filled_rectangle(240, 480, 2, 100); // ligne verticale pour le tableau
+      it.print(260, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A72"); //picto prod solaire
       it.printf(290, 515, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(prod_solaire_jour).state);
       it.print(310, 525, id(mdi36), TextAlign::TOP_CENTER, "\U000F09B8");  //picto gauche
       it.print(340, 525, id(mdi36), TextAlign::TOP_CENTER, "\U000F09BA"); //picto droite
-      it.printf(240, 555, id(book20), TextAlign::TOP_CENTER, "Vidage de la cave : %d", (int)id(compteur_vidage).state);
+      it.printf(275, 575, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(import_energie).state);
+      it.printf(335, 575, id(book20), TextAlign::TOP_LEFT, "%.1f kwH", id(export_energie).state);
+      it.printf(240, 595, id(book20), TextAlign::TOP_CENTER, "Vidage de la cave : %d", (int)id(compteur_vidage).state);
       it.printf(250, 785, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
       it.strftime(255, 785, id(bold15), TextAlign::TOP_LEFT, "%d-%m-%Y %H:%M", id(sntp_time).now());
