@@ -220,7 +220,22 @@ display:
     rotation: 270° #Résolution écran 480x800
     update_interval: 180s
     lambda: |-
-      it.strftime(240, 15, id(bold35), TextAlign::TOP_CENTER, "%d-%m-%Y", id(sntp_time).now());
+      //Tableau des jours en français
+      const char* jours_fr[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+      //Récupération de la date et heure actuelle
+      auto time = id(sntp_time).now();
+      if (time.is_valid()) {
+      // Construction de la ligne "Jour JJ-MM-AAAA"
+      char buffer[40];
+      snprintf(buffer, sizeof(buffer), "%s %02d-%02d-%04d",
+             jours_fr[time.day_of_week % 7], // conversion jour en français
+             time.day_of_month,
+             time.month,
+             time.year);
+      // Affichage centré en haut
+      it.printf(240, 15, id(bold35), TextAlign::TOP_CENTER, "%s", buffer);
+      }
+      //it.strftime(240, 15, id(bold35), TextAlign::TOP_CENTER, "%d-%m-%Y", id(sntp_time).now()); A supprimer
       it.filled_rectangle(50, 50, 400, 3); // ligne horizontale 
       it.printf(240, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :");
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
