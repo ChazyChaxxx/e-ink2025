@@ -143,8 +143,8 @@ font:
       - "\U000F192D" # mdi-export_energie
       - "\U000F1A1B" # mdi-gas-burner
       - "\U000F140B" # mdi-energy
-      - "\U000F09B8" # mdi-arrow-left
-      - "\U000F09BA" # mdi-arrow-right
+      - "\U000F0042" # mdi-arrow-left
+      - "\U000F0043" # mdi-arrow-right
       - "\U000F1906" # mdi-leaf
       - "\U000F1363" # mdi-bottle-plastic
       - "\U000F03D6" # mdi-cardboard
@@ -220,19 +220,16 @@ display:
     rotation: 270° #Résolution écran 480x800
     update_interval: 180s
     lambda: |-
-      //Tableau des jours en français
-      const char* jours_fr[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
-      //Récupération de la date et heure actuelle
+      // Tableau des jours en français (lundi = 1 … dimanche = 7)
+      const char* jours_fr[] = {"", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"};
       auto time = id(sntp_time).now();
       if (time.is_valid()) {
-      // Construction de la ligne "Jour JJ-MM-AAAA"
       char buffer[40];
       snprintf(buffer, sizeof(buffer), "%s %02d-%02d-%04d",
-             jours_fr[time.day_of_week % 7], // conversion jour en français
-             time.day_of_month,
-             time.month,
-             time.year);
-      // Affichage centré en haut
+      jours_fr[time.day_of_week],
+      time.day_of_month,
+      time.month,
+      time.year);
       it.printf(240, 15, id(bold35), TextAlign::TOP_CENTER, "%s", buffer);
       }
       //it.strftime(240, 15, id(bold35), TextAlign::TOP_CENTER, "%d-%m-%Y", id(sntp_time).now()); A supprimer
@@ -253,15 +250,15 @@ display:
       it.filled_rectangle(50, 490, 380, 2); // ligne horizontale pour le tableau
       it.printf(50, 515, id(book20), TextAlign::TOP_LEFT, "%.1f litres", id(compteur_d_eau).state);
       it.print(20, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0E0A"); //picto eau
-      it.printf(50, 553, id(book20), TextAlign::TOP_LEFT, "%.1f m3", id(gasmeter).state);
-      it.print(20, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A1B"); //picto gaz
+      it.printf(50, 555, id(book20), TextAlign::TOP_LEFT, "%.1f m3", id(gasmeter).state);
+      it.print(20, 539, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A1B"); //picto gaz
       it.printf(50, 585, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(conso_elec_quoti).state);
       it.print(20, 575, id(mdi36), TextAlign::TOP_CENTER, "\U000F140B"); //picto conso elec
       it.filled_rectangle(240, 490, 2, 100); // ligne verticale pour le tableau
       it.print(260, 505, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A72"); //picto prod solaire
       it.printf(290, 515, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(prod_solaire_jour).state);
-      it.print(310, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F09B8");  //picto gauche
-      it.print(340, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F09BA"); //picto droite
+      it.print(310, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F0042");  //picto gauche
+      it.print(355, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F0043"); //picto droite
       it.printf(265, 590, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(autoconsommation).state);
       it.printf(370, 590, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(export_energie).state);
       it.printf(240, 620, id(book20), TextAlign::TOP_CENTER, "Vidage de la cave : %d", (int)id(compteur_vidage).state);
