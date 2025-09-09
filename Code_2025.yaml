@@ -14,7 +14,7 @@ wifi:
     gateway: 192.168.128.1
     subnet: 255.255.254.0
     dns1: 8.8.8.8
-
+    
 script:
   - id: update_screen
     then:
@@ -44,6 +44,7 @@ time:
         then:
           - script.execute: update_screen
 logger:
+  level: DEBUG
 
 api:
 
@@ -218,7 +219,7 @@ display:
     reset_pin: 26
     model: 7.50inV2
     rotation: 270° #Résolution écran 480x800
-    update_interval: 180s
+    update_interval: 500s
     lambda: |-
       // Tableau des jours en français (lundi = 1 … dimanche = 7)
       const char* jours_fr[] = {"", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"};
@@ -232,17 +233,16 @@ display:
       time.year);
       it.printf(240, 15, id(bold35), TextAlign::TOP_CENTER, "%s", buffer);
       }
-      //it.strftime(240, 15, id(bold35), TextAlign::TOP_CENTER, "%d-%m-%Y", id(sntp_time).now()); A supprimer
       it.filled_rectangle(50, 50, 400, 3); // ligne horizontale 
       it.printf(240, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :");
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
       it.filled_rectangle(50, 370, 380, 2);
       it.print(168, 380, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
       it.printf(240, 390, id(bold20), TextAlign::TOP_CENTER, "Poubelles :");
-      it.print(20, 415, id(mdi36), TextAlign::TOP_CENTER, "\U000F1906"); //picto leaf
-      it.print(20, 440, id(mdi36), TextAlign::TOP_CENTER, "\U000F1363"); //picto bottle plastic
-      it.print(260, 415, id(mdi36), TextAlign::TOP_CENTER, "\U000F03D6"); //picto cardboard
-      it.print(260, 440, id(mdi36), TextAlign::TOP_CENTER, "\U000F1873"); //picto glass
+      it.print(20, 412, id(mdi36), TextAlign::TOP_CENTER, "\U000F1906"); //picto leaf
+      it.print(20, 442, id(mdi36), TextAlign::TOP_CENTER, "\U000F1363"); //picto bottle plastic
+      it.print(260, 412, id(mdi36), TextAlign::TOP_CENTER, "\U000F03D6"); //picto cardboard
+      it.print(260, 442, id(mdi36), TextAlign::TOP_CENTER, "\U000F1873"); //picto glass
       it.printf(50, 425, id(book20), TextAlign::TOP_LEFT, "%s", id(dechets_organiques_date).state.c_str()); //organique
       it.printf(50, 450, id(book20), TextAlign::TOP_LEFT, "%s", id(pmc_date).state.c_str()); //pmc
       it.printf(290, 425, id(book20), TextAlign::TOP_LEFT, "%s", id(carton_date).state.c_str()); //carton
