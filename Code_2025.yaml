@@ -67,8 +67,8 @@ font:
       'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
       'é', 'à', 'è', 'ç', 'ù', 'ö', 'É', 'À', 'È', 'Ç', 'Ù']
   - file: "epaper/GothamRnd-Book.ttf"
-    id: book8
-    size: 8
+    id: book12
+    size: 12
     glyphs : *font-glyphs 
   ########## BOLD ############ 
   - file: "epaper/GothamRnd-Bold.ttf"
@@ -245,15 +245,15 @@ display:
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
       it.filled_rectangle(50, 125, 380, 2);
       it.filled_rectangle(50, 370, 380, 2);
-      it.print(160, 380, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
+      it.print(94, 380, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
       it.printf(240, 390, id(bold20), TextAlign::TOP_CENTER, "Ramassage des déchets :"); //titre
-      it.print(20, 410, id(mdi30), TextAlign::TOP_CENTER, "\U000F1906"); //picto leaf
+      it.print(20, 413, id(mdi30), TextAlign::TOP_CENTER, "\U000F1906"); //picto leaf
       it.print(20, 448, id(mdi30), TextAlign::TOP_CENTER, "\U000F1363"); //picto bottle plastic
-      it.print(260, 410, id(mdi30), TextAlign::TOP_CENTER, "\U000F03D6"); //picto cardboard
+      it.print(260, 413, id(mdi30), TextAlign::TOP_CENTER, "\U000F03D6"); //picto cardboard
       it.print(260, 448, id(mdi30), TextAlign::TOP_CENTER, "\U000F1873"); //picto glass
-      it.printf(50, 425, id(book20), TextAlign::TOP_LEFT, "%s", id(dechets_organiques_date).state.c_str()); //organique
+      it.printf(50, 421, id(book20), TextAlign::TOP_LEFT, "%s", id(dechets_organiques_date).state.c_str()); //organique
       it.printf(50, 455, id(book20), TextAlign::TOP_LEFT, "%s", id(pmc_date).state.c_str()); //pmc
-      it.printf(290, 425, id(book20), TextAlign::TOP_LEFT, "%s", id(carton_date).state.c_str()); //carton
+      it.printf(290, 421, id(book20), TextAlign::TOP_LEFT, "%s", id(carton_date).state.c_str()); //carton
       it.printf(290, 455, id(book20), TextAlign::TOP_LEFT, "%s", id(verre_date).state.c_str()); //verre
       it.filled_rectangle(50, 495, 380, 2); // ligne horizontale pour le tableau
       it.printf(50, 510, id(book20), TextAlign::TOP_LEFT, "%.1f litres", id(compteur_d_eau).state);
@@ -262,14 +262,17 @@ display:
       it.print(20, 534, id(mdi30), TextAlign::TOP_CENTER, "\U000F1A1B"); //picto gaz
       it.printf(50, 572, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(conso_elec_quoti).state);
       it.print(20, 567, id(mdi30), TextAlign::TOP_CENTER, "\U000F140B"); //picto conso elec
-      it.printf(20, 585, id(book8), TextAlign::TOP_LEFT, "%.1f%% consommés depuis les panneaux solaires", id(pourcentage_autoconso).state);
+      it.printf(50, 595, id(bold15), TextAlign::TOP_LEFT, "%.1f%%", id(pourcentage_autoconso).state);
+      it.printf(78, 598, id(book12), TextAlign::TOP_LEFT, "autoconsommés");
       it.filled_rectangle(240, 495, 2, 125); // ligne verticale pour le tableau
-      it.print(360, 500, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A73"); //picto prod solaire
-      it.printf(305, 520, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(prod_solaire_jour).state);
-      it.print(330, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F0042");  //picto gauche
-      it.print(370, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F0043"); //picto droite
-      it.printf(265, 590, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(autoconsommation).state);
-      it.printf(370, 590, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(export_energie).state);
+      it.print(355, 497, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A73"); //picto prod solaire
+      it.printf(315, 537, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(prod_solaire_jour).state);
+      it.print(330, 550, id(mdi30), TextAlign::TOP_CENTER, "\U000F0042");  //picto gauche
+      it.print(370, 550, id(mdi30), TextAlign::TOP_CENTER, "\U000F0043"); //picto droite
+      it.printf(265, 585, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(autoconsommation).state);
+      it.printf(370, 585, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(export_energie).state);
+      it.printf(262, 605, id(book12), TextAlign::TOP_LEFT, "autoconsommés");
+      it.printf(378, 605, id(book12), TextAlign::TOP_LEFT, "renvoyés");
       it.filled_rectangle(50, 620, 380, 2); // ligne horizontale qui ferme le tableau
       it.print(120, 630, id(mdi36), TextAlign::TOP_CENTER, "\U000F0EFA"); //picto innondation
       it.printf(240, 640, id(bold20), TextAlign::TOP_CENTER, "Puisard de la cave :"); //titre
