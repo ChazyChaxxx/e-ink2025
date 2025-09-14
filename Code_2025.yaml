@@ -222,7 +222,7 @@ display:
     update_interval: 500s
     lambda: |-
       // Tableau des jours en français (lundi = 1 … dimanche = 7)
-      const char* jours_fr[] = {"", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"};
+      const char* jours_fr[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
       auto time = id(sntp_time).now();
       if (time.is_valid()) {
       char buffer[40];
