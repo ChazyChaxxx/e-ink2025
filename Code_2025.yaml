@@ -163,9 +163,11 @@ font:
     
 sensor:
   - platform: homeassistant
-    entity_id: weather.pont_a_celles
-    attribute: temperature
-    id: weather_temperature
+    entity_id: sensor.mokip_outdoor_temperature
+    id: weather_temperature_outside
+  - platform: homeassistant
+    entity_id: sensor.mokip_zone_zone_1_circuit_0_current_temperature
+    id: weather_humidity_inside
   - platform: homeassistant
     entity_id: counter.compteur_de_vidage_du_puit
     id: compteur_vidage
@@ -219,10 +221,10 @@ text_sensor:
 
 graph:
   - id: weather_temperature_graph
-    sensor: weather_temperature
+    sensor: weather_temperature_outside
     duration: 24h
     width: 380
-    height: 50
+    height: 125
     min_value: 0
 
 display:
@@ -254,7 +256,7 @@ display:
       it.printf(245, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :"); //titre
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
       it.filled_rectangle(50, 125, 380, 2);
-      it.graph(50, 135, id(weather_temperature_graph)); // graphique température
+      it.graph(50, 155, id(weather_temperature_graph)); // graphique température
       it.filled_rectangle(50, 370, 380, 2);
       it.print(94, 380, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
       it.printf(240, 390, id(bold20), TextAlign::TOP_CENTER, "Ramassage des déchets :"); //titre
@@ -266,29 +268,29 @@ display:
       it.printf(50, 455, id(book20), TextAlign::TOP_LEFT, "%s", id(pmc_date).state.c_str()); //pmc
       it.printf(290, 421, id(book20), TextAlign::TOP_LEFT, "%s", id(carton_date).state.c_str()); //carton
       it.printf(290, 455, id(book20), TextAlign::TOP_LEFT, "%s", id(verre_date).state.c_str()); //verre
-      it.print(94, 525, id(mdi36), TextAlign::TOP_CENTER, "\U000F0199"); // picto compteurs
-      it.printf(240, 535, id(bold20), TextAlign::TOP_CENTER, "Consommations et prod solaire :"); //titre
-      it.printf(50, 550, id(book20), TextAlign::TOP_LEFT, "%.1f litres", id(compteur_d_eau).state);
-      it.print(20, 543, id(mdi30), TextAlign::TOP_CENTER, "\U000F0E0A"); //picto eau
-      it.printf(50, 581, id(book20), TextAlign::TOP_LEFT, "%.1f m3", id(gasmeter).state);
-      it.print(20, 574, id(mdi30), TextAlign::TOP_CENTER, "\U000F1A1B"); //picto gaz
-      it.printf(50, 612, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(conso_elec_quoti).state);
-      it.print(20, 607, id(mdi30), TextAlign::TOP_CENTER, "\U000F140B"); //picto conso elec
-      it.printf(50, 635, id(bold15), TextAlign::TOP_LEFT, "%.1f%%", id(pourcentage_autoconso).state);
-      it.printf(86, 638, id(book12), TextAlign::TOP_LEFT, "d'autosuffisance");
-      it.filled_rectangle(240, 535, 2, 125); // ligne verticale pour le tableau
-      it.print(355, 537, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A73"); //picto prod solaire
-      it.printf(315, 577, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(prod_solaire_jour).state);
-      it.print(330, 590, id(mdi30), TextAlign::TOP_CENTER, "\U000F0042");  //picto gauche
-      it.print(370, 590, id(mdi30), TextAlign::TOP_CENTER, "\U000F0043"); //picto droite
-      it.printf(265, 625, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(autoconsommation).state);
-      it.printf(370, 625, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(export_energie).state);
-      it.printf(262, 645, id(book12), TextAlign::TOP_LEFT, "autoconsommés");
-      it.printf(378, 645, id(book12), TextAlign::TOP_LEFT, "renvoyés");
-      it.filled_rectangle(50, 680, 380, 2); // ligne horizontale qui ferme le tableau
+      it.print(67, 535, id(mdi36), TextAlign::TOP_CENTER, "\U000F0199"); // picto compteurs
+      it.printf(240, 545, id(bold20), TextAlign::TOP_CENTER, "Consommations et prod solaire :"); //titre
+      it.printf(50, 560, id(book20), TextAlign::TOP_LEFT, "%.1f litres", id(compteur_d_eau).state);
+      it.print(20, 553, id(mdi30), TextAlign::TOP_CENTER, "\U000F0E0A"); //picto eau
+      it.printf(50, 591, id(book20), TextAlign::TOP_LEFT, "%.1f m3", id(gasmeter).state);
+      it.print(20, 584, id(mdi30), TextAlign::TOP_CENTER, "\U000F1A1B"); //picto gaz
+      it.printf(50, 622, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(conso_elec_quoti).state);
+      it.print(20, 617, id(mdi30), TextAlign::TOP_CENTER, "\U000F140B"); //picto conso elec
+      it.printf(50, 645, id(bold15), TextAlign::TOP_LEFT, "%.1f%%", id(pourcentage_autoconso).state);
+      it.printf(86, 648, id(book12), TextAlign::TOP_LEFT, "d'autosuffisance");
+      it.filled_rectangle(240, 563, 2, 125); // ligne verticale pour le tableau
+      it.print(355, 547, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A73"); //picto prod solaire
+      it.printf(315, 587, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(prod_solaire_jour).state);
+      it.print(330, 600, id(mdi30), TextAlign::TOP_CENTER, "\U000F0042");  //picto gauche
+      it.print(370, 600, id(mdi30), TextAlign::TOP_CENTER, "\U000F0043"); //picto droite
+      it.printf(265, 635, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(autoconsommation).state);
+      it.printf(370, 635, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(export_energie).state);
+      it.printf(262, 655, id(book12), TextAlign::TOP_LEFT, "autoconsommés");
+      it.printf(378, 655, id(book12), TextAlign::TOP_LEFT, "renvoyés");
+      it.filled_rectangle(50, 688, 380, 2); // ligne horizontale qui ferme le tableau
       it.print(120, 705, id(mdi36), TextAlign::TOP_CENTER, "\U000F0EFA"); //picto innondation
       it.printf(240, 715, id(bold20), TextAlign::TOP_CENTER, "Puisard de la cave :"); //titre
       it.printf(240, 740, id(book20), TextAlign::TOP_CENTER, "Vidage aujourd'hui : %d", (int)id(compteur_vidage).state);
-      it.printf(240, 760, id(book12), TextAlign::TOP_CENTER, "Dernier vidage : %s", id(dernier_vidage).state.c_str());
+      it.printf(240, 764, id(book12), TextAlign::TOP_CENTER, "Dernier vidage : %s", id(dernier_vidage).state.c_str());
       it.printf(250, 785, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
       it.strftime(255, 785, id(bold15), TextAlign::TOP_LEFT, "%d-%m-%Y %H:%M", id(sntp_time).now());
