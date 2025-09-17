@@ -271,21 +271,24 @@ display:
       it.printf(245, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :"); //titre
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
       it.filled_rectangle(50, 125, 380, 2);
-      it.filled_rectangle(50, 250, 380, 2);
-      it.print(137, 260, id(mdi36), TextAlign::TOP_CENTER, "\U000F1B4C"); // picto pills 
-      it.printf(245, 270, id(bold20), TextAlign::TOP_CENTER, "Antiparasitaires :"); //titre
-      it.filled_rectangle(80, 310, 320, 1); // tableau ligne du haut
-      it.filled_rectangle(80, 330, 320, 1); // tableau ligne inter horizontale 1
-      it.filled_rectangle(80, 350, 320, 1); // tableau ligne inter horizontale 2
-      it.filled_rectangle(80, 370, 320, 1); // tableau ligne du bas
-      it.filled_rectangle(80, 290, 1, 60); // tableau ligne cadre ext gauche
-      it.filled_rectangle(280, 270, 1, 80); // tableau ligne vert inter 1
-      it.filled_rectangle(320, 270, 1, 80); // tableau ligne vert inter 2
-      it.filled_rectangle(360, 270, 1, 80); // tableau ligne vert inter 3
-      it.filled_rectangle(400, 270, 1, 80); // tableau ligne cadre ext droite
-      it.printf(85, 295, id(bold15), TextAlign::TOP_LEFT, "Sushi");
-      it.printf(85, 315, id(bold15), TextAlign::TOP_LEFT, "Pepita");
-      it.printf(85, 335, id(bold15), TextAlign::TOP_LEFT, "Knacki");
+      it.filled_rectangle(50, 270, 380, 2);
+      it.print(137, 280, id(mdi36), TextAlign::TOP_CENTER, "\U000F1B4C"); // picto pills 
+      it.printf(245, 290, id(bold20), TextAlign::TOP_CENTER, "Antiparasitaires :"); //titre
+      it.print(287, 315, id(mdi30), TextAlign::TOP_CENTER, "\U000F082D"); //picto antipuces
+      it.print(332, 315, id(mdi30), TextAlign::TOP_CENTER, "\U000F13DB"); //picto vermifuge
+      it.print(387, 315, id(mdi30), TextAlign::TOP_CENTER, "\U000F0391"); //picto vaccin
+      it.filled_rectangle(80, 330, 320, 1); // tableau ligne du haut
+      it.filled_rectangle(80, 350, 320, 1); // tableau ligne inter horizontale 1
+      it.filled_rectangle(80, 370, 320, 1); // tableau ligne inter horizontale 2
+      it.filled_rectangle(80, 390, 320, 1); // tableau ligne du bas
+      it.filled_rectangle(80, 330, 1, 60); // tableau ligne cadre ext gauche
+      it.filled_rectangle(265, 310, 1, 80); // tableau ligne vert inter 1
+      it.filled_rectangle(310, 310, 1, 80); // tableau ligne vert inter 2
+      it.filled_rectangle(355, 310, 1, 80); // tableau ligne vert inter 3
+      it.filled_rectangle(400, 310, 1, 80); // tableau ligne cadre ext droite
+      it.printf(85, 335, id(bold15), TextAlign::TOP_LEFT, "Sushi");
+      it.printf(85, 355, id(bold15), TextAlign::TOP_LEFT, "Pepita");
+      it.printf(85, 375, id(bold15), TextAlign::TOP_LEFT, "Knacki");
       it.filled_rectangle(50, 400, 380, 2);
       it.print(94, 410, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
       it.printf(240, 420, id(bold20), TextAlign::TOP_CENTER, "Ramassage des déchets :"); //titre
