@@ -151,6 +151,10 @@ font:
       - "\U000F1873" # mdi-glass
       - "\U000F0EFA" # mdi-flood
       - "\U000F0199" # mdi-counters
+      - "\U000F1B4C" # mdi-pills
+      - "\U000F082D" # mdi-ladybug
+      - "\U000F13DB" # mdi-bug-shield
+      - "\U000F0391" # mdi-needle
 
   - file: 'epaper/materialdesignicons-webfont.ttf'
     id: mdi36
@@ -195,6 +199,24 @@ sensor:
   - platform: homeassistant
     entity_id: sensor.pourcentage_autoconso
     id: pourcentage_autoconso
+  - platform: homeassistant
+    entity_id: counter.anti_puce_knacki
+    id: anti_puce_knacki
+  - platform: homeassistant
+    entity_id: counter.anti_puce_sushi
+    id: anti_puce_sushi
+  - platform: homeassistant
+    entity_id: counter.anti_puce_pepita
+    id: anti_puce_pepita
+  - platform: homeassistant
+    entity_id: counter.vermifuge_knacki
+    id: vermifuge_knacki
+  - platform: homeassistant
+    entity_id: counter.vermifuge_sushi
+    id: vermifuge_sushi
+  - platform: homeassistant
+    entity_id: counter.vermifuge_pepita
+    id: vermifuge_pepita
 
 text_sensor: 
   - platform: homeassistant
@@ -219,14 +241,6 @@ text_sensor:
     entity_id: sensor.date_dernier_vidage_de_la_cave
     id: dernier_vidage
 
-graph:
-  - id: weather_temperature_graph
-    sensor: weather_temperature_outside
-    duration: 12h
-    width: 380
-    height: 100
-    min_value: 5
-    max_value: 25
 
 display:
   - platform: waveshare_epaper
@@ -257,13 +271,21 @@ display:
       it.printf(245, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :"); //titre
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
       it.filled_rectangle(50, 125, 380, 2);
-      it.graph(50, 255, id(weather_temperature_graph)); // graphique température
-      it.printf(48, 255, id(book12), TextAlign::TOP_RIGHT, "25°C");
-      it.printf(48, 305, id(book12), TextAlign::TOP_RIGHT, "15°C");
-      it.printf(48, 351, id(book12), TextAlign::TOP_RIGHT, "5°C");
-      it.printf(51, 361, id(book12), TextAlign::TOP_LEFT, "-12h");
-      it.printf(240, 361, id(book12), TextAlign::TOP_CENTER, "-6h");
-      it.printf(430, 361, id(book12), TextAlign::TOP_RIGHT, "-0h");
+      it.filled_rectangle(50, 250, 380, 2);
+      it.print(137, 260, id(mdi36), TextAlign::TOP_CENTER, "\U000F1B4C"); // picto pills 
+      it.printf(245, 270, id(bold20), TextAlign::TOP_CENTER, "Antiparasitaires :"); //titre
+      it.filled_rectangle(80, 310, 320, 1); // tableau ligne du haut
+      it.filled_rectangle(80, 330, 320, 1); // tableau ligne inter horizontale 1
+      it.filled_rectangle(80, 350, 320, 1); // tableau ligne inter horizontale 2
+      it.filled_rectangle(80, 370, 320, 1); // tableau ligne du bas
+      it.filled_rectangle(80, 290, 1, 60); // tableau ligne cadre ext gauche
+      it.filled_rectangle(280, 270, 1, 80); // tableau ligne vert inter 1
+      it.filled_rectangle(320, 270, 1, 80); // tableau ligne vert inter 2
+      it.filled_rectangle(360, 270, 1, 80); // tableau ligne vert inter 3
+      it.filled_rectangle(400, 270, 1, 80); // tableau ligne cadre ext droite
+      it.printf(85, 295, id(bold15), TextAlign::TOP_LEFT, "Sushi");
+      it.printf(85, 315, id(bold15), TextAlign::TOP_LEFT, "Pepita");
+      it.printf(85, 335, id(bold15), TextAlign::TOP_LEFT, "Knacki");
       it.filled_rectangle(50, 400, 380, 2);
       it.print(94, 410, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
       it.printf(240, 420, id(bold20), TextAlign::TOP_CENTER, "Ramassage des déchets :"); //titre
