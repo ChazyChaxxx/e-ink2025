@@ -67,6 +67,10 @@ font:
       'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
       'é', 'à', 'è', 'ç', 'ù', 'ö', 'É', 'À', 'È', 'Ç', 'Ù']
   - file: "epaper/GothamRnd-Book.ttf"
+    id: book15
+    size: 15
+    glyphs : *font-glyphs 
+  - file: "epaper/GothamRnd-Book.ttf"
     id: book12
     size: 12
     glyphs : *font-glyphs 
@@ -164,6 +168,10 @@ font:
     id: mdi30
     size: 30
     glyphs: *mdi-weather-glyphs
+  - file: 'epaper/materialdesignicons-webfont.ttf'
+    id: mdi25
+    size: 25
+    glyphs: *mdi-weather-glyphs
     
 sensor:
   - platform: homeassistant
@@ -217,6 +225,19 @@ sensor:
   - platform: homeassistant
     entity_id: counter.vermifuge_pepita
     id: vermifuge_pepita
+  - platform: homeassistant
+    entity_id: weather.pont_a_celles
+    attribute: temperature
+    id: weather_temperature
+  - platform: homeassistant
+    entity_id: counter.vaccin_sushi
+    id: vaccin_sushi
+  - platform: homeassistant
+    entity_id: counter.vaccin_pepita
+    id: vaccin_pepita
+  - platform: homeassistant
+    entity_id: counter.vaccin_knacki
+    id: vaccin_knacki
 
 text_sensor: 
   - platform: homeassistant
@@ -271,35 +292,44 @@ display:
       it.printf(245, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :"); //titre
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
       it.filled_rectangle(50, 125, 380, 2);
-      it.filled_rectangle(50, 270, 380, 2);
-      it.print(137, 280, id(mdi36), TextAlign::TOP_CENTER, "\U000F1B4C"); // picto pills 
-      it.printf(245, 290, id(bold20), TextAlign::TOP_CENTER, "Antiparasitaires :"); //titre
-      it.print(287, 315, id(mdi30), TextAlign::TOP_CENTER, "\U000F082D"); //picto antipuces
-      it.print(332, 315, id(mdi30), TextAlign::TOP_CENTER, "\U000F13DB"); //picto vermifuge
-      it.print(387, 315, id(mdi30), TextAlign::TOP_CENTER, "\U000F0391"); //picto vaccin
-      it.filled_rectangle(80, 330, 320, 1); // tableau ligne du haut
-      it.filled_rectangle(80, 350, 320, 1); // tableau ligne inter horizontale 1
-      it.filled_rectangle(80, 370, 320, 1); // tableau ligne inter horizontale 2
-      it.filled_rectangle(80, 390, 320, 1); // tableau ligne du bas
-      it.filled_rectangle(80, 330, 1, 60); // tableau ligne cadre ext gauche
-      it.filled_rectangle(265, 310, 1, 80); // tableau ligne vert inter 1
-      it.filled_rectangle(310, 310, 1, 80); // tableau ligne vert inter 2
-      it.filled_rectangle(355, 310, 1, 80); // tableau ligne vert inter 3
-      it.filled_rectangle(400, 310, 1, 80); // tableau ligne cadre ext droite
-      it.printf(85, 335, id(bold15), TextAlign::TOP_LEFT, "Sushi");
-      it.printf(85, 355, id(bold15), TextAlign::TOP_LEFT, "Pepita");
-      it.printf(85, 375, id(bold15), TextAlign::TOP_LEFT, "Knacki");
-      it.filled_rectangle(50, 400, 380, 2);
-      it.print(94, 410, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
-      it.printf(240, 420, id(bold20), TextAlign::TOP_CENTER, "Ramassage des déchets :"); //titre
-      it.print(20, 443, id(mdi30), TextAlign::TOP_CENTER, "\U000F1906"); //picto leaf
-      it.print(20, 478, id(mdi30), TextAlign::TOP_CENTER, "\U000F1363"); //picto bottle plastic
-      it.print(260, 443, id(mdi30), TextAlign::TOP_CENTER, "\U000F03D6"); //picto cardboard
-      it.print(260, 478, id(mdi30), TextAlign::TOP_CENTER, "\U000F1873"); //picto glass
-      it.printf(50, 451, id(book20), TextAlign::TOP_LEFT, "%s", id(dechets_organiques_date).state.c_str()); //organique
-      it.printf(50, 485, id(book20), TextAlign::TOP_LEFT, "%s", id(pmc_date).state.c_str()); //pmc
-      it.printf(290, 451, id(book20), TextAlign::TOP_LEFT, "%s", id(carton_date).state.c_str()); //carton
-      it.printf(290, 485, id(book20), TextAlign::TOP_LEFT, "%s", id(verre_date).state.c_str()); //verre
+      it.filled_rectangle(50, 260, 380, 2);
+      it.print(137, 270, id(mdi36), TextAlign::TOP_CENTER, "\U000F1B4C"); // picto pills 
+      it.printf(245, 280, id(bold20), TextAlign::TOP_CENTER, "Antiparasitaires :"); //titre
+      it.print(287, 325, id(mdi25), TextAlign::TOP_CENTER, "\U000F13DB"); //picto antipuces
+      it.print(332, 325, id(mdi25), TextAlign::TOP_CENTER, "\U000F082D"); //picto vermifuge
+      it.print(383, 325, id(mdi25), TextAlign::TOP_CENTER, "\U000F0391"); //picto vaccin
+      it.filled_rectangle(80, 335, 320, 1); // tableau ligne du haut
+      it.filled_rectangle(80, 355, 320, 1); // tableau ligne inter horizontale 1
+      it.filled_rectangle(80, 375, 320, 1); // tableau ligne inter horizontale 2
+      it.filled_rectangle(80, 395, 320, 1); // tableau ligne du bas
+      it.filled_rectangle(80, 335, 1, 60); // tableau ligne cadre ext gauche
+      it.filled_rectangle(265, 315, 1, 80); // tableau ligne vert inter 1
+      it.filled_rectangle(310, 315, 1, 80); // tableau ligne vert inter 2
+      it.filled_rectangle(355, 315, 1, 80); // tableau ligne vert inter 3
+      it.filled_rectangle(400, 315, 1, 80); // tableau ligne cadre ext droite
+      it.printf(85, 340, id(bold15), TextAlign::TOP_LEFT, "Sushi");
+      it.printf(85, 360, id(bold15), TextAlign::TOP_LEFT, "Pepita");
+      it.printf(85, 380, id(bold15), TextAlign::TOP_LEFT, "Knacki");
+      it.printf(287, 340, id(book15), TextAlign::TOP_CENTER, "%.0f", id(anti_puce_sushi).state);
+      it.printf(332, 340, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vermifuge_sushi).state);
+      it.printf(383, 340, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vaccin_sushi).state);
+      it.printf(287, 360, id(book15), TextAlign::TOP_CENTER, "%.0f", id(anti_puce_pepita).state);
+      it.printf(332, 360, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vermifuge_pepita).state);
+      it.printf(383, 360, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vaccin_pepita).state);
+      it.printf(287, 380, id(book15), TextAlign::TOP_CENTER, "%.0f", id(anti_puce_knacki).state);
+      it.printf(332, 380, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vermifuge_knacki).state);
+      it.printf(383, 380, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vaccin_knacki).state);
+      it.filled_rectangle(50, 405, 380, 2);
+      it.print(94, 415, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
+      it.printf(240, 425, id(bold20), TextAlign::TOP_CENTER, "Ramassage des déchets :"); //titre
+      it.print(20, 448, id(mdi30), TextAlign::TOP_CENTER, "\U000F1906"); //picto leaf
+      it.print(20, 483, id(mdi30), TextAlign::TOP_CENTER, "\U000F1363"); //picto bottle plastic
+      it.print(260, 448, id(mdi30), TextAlign::TOP_CENTER, "\U000F03D6"); //picto cardboard
+      it.print(260, 483, id(mdi30), TextAlign::TOP_CENTER, "\U000F1873"); //picto glass
+      it.printf(50, 456, id(book20), TextAlign::TOP_LEFT, "%s", id(dechets_organiques_date).state.c_str()); //organique
+      it.printf(50, 490, id(book20), TextAlign::TOP_LEFT, "%s", id(pmc_date).state.c_str()); //pmc
+      it.printf(290, 456, id(book20), TextAlign::TOP_LEFT, "%s", id(carton_date).state.c_str()); //carton
+      it.printf(290, 490, id(book20), TextAlign::TOP_LEFT, "%s", id(verre_date).state.c_str()); //verre
       it.filled_rectangle(50, 530, 380, 2); // ligne horizontale 
       it.print(53, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F0199"); // picto compteurs
       it.printf(240, 550, id(bold20), TextAlign::TOP_CENTER, "Consommations et prod solaire :"); //titre
