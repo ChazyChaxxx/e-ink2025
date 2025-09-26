@@ -295,9 +295,9 @@ display:
       it.filled_rectangle(50, 260, 380, 2);
       it.print(137, 270, id(mdi36), TextAlign::TOP_CENTER, "\U000F1B4C"); // picto pills 
       it.printf(245, 280, id(bold20), TextAlign::TOP_CENTER, "Antiparasitaires :"); //titre
-      it.print(287, 325, id(mdi25), TextAlign::TOP_CENTER, "\U000F13DB"); //picto antipuces
-      it.print(332, 325, id(mdi25), TextAlign::TOP_CENTER, "\U000F082D"); //picto vermifuge
-      it.print(383, 325, id(mdi25), TextAlign::TOP_CENTER, "\U000F0391"); //picto vaccin
+      it.print(287, 306, id(mdi25), TextAlign::TOP_CENTER, "\U000F13DB"); //picto antipuces
+      it.print(332, 306, id(mdi25), TextAlign::TOP_CENTER, "\U000F082D"); //picto vermifuge
+      it.print(380, 306, id(mdi25), TextAlign::TOP_CENTER, "\U000F0391"); //picto vaccin
       it.filled_rectangle(80, 335, 320, 1); // tableau ligne du haut
       it.filled_rectangle(80, 355, 320, 1); // tableau ligne inter horizontale 1
       it.filled_rectangle(80, 375, 320, 1); // tableau ligne inter horizontale 2
@@ -312,13 +312,13 @@ display:
       it.printf(85, 380, id(bold15), TextAlign::TOP_LEFT, "Knacki");
       it.printf(287, 340, id(book15), TextAlign::TOP_CENTER, "%.0f", id(anti_puce_sushi).state);
       it.printf(332, 340, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vermifuge_sushi).state);
-      it.printf(383, 340, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vaccin_sushi).state);
+      it.printf(380, 340, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vaccin_sushi).state);
       it.printf(287, 360, id(book15), TextAlign::TOP_CENTER, "%.0f", id(anti_puce_pepita).state);
       it.printf(332, 360, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vermifuge_pepita).state);
-      it.printf(383, 360, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vaccin_pepita).state);
+      it.printf(380, 360, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vaccin_pepita).state);
       it.printf(287, 380, id(book15), TextAlign::TOP_CENTER, "%.0f", id(anti_puce_knacki).state);
       it.printf(332, 380, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vermifuge_knacki).state);
-      it.printf(383, 380, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vaccin_knacki).state);
+      it.printf(380, 380, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vaccin_knacki).state);
       it.filled_rectangle(50, 405, 380, 2);
       it.print(94, 415, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
       it.printf(240, 425, id(bold20), TextAlign::TOP_CENTER, "Ramassage des déchets :"); //titre
