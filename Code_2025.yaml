@@ -226,9 +226,14 @@ sensor:
     entity_id: counter.vermifuge_pepita
     id: vermifuge_pepita
   - platform: homeassistant
-    entity_id: weather.pont_a_celles
-    attribute: temperature
-    id: weather_temperature
+    entity_id: sensor.pont_a_celles_cloud_cover
+    id: weather_cloud_cover
+  - platform: homeassistant
+    entity_id: sensor.pont_a_celles_daily_precipitation
+    id: weather_precipitation
+  - platform: homeassistant
+    entity_id: sensor.pont_a_celles_humidity
+    id: weather_humidity
   - platform: homeassistant
     entity_id: counter.vaccin_sushi
     id: vaccin_sushi
@@ -261,6 +266,12 @@ text_sensor:
   - platform: homeassistant
     entity_id: sensor.date_dernier_vidage_de_la_cave
     id: dernier_vidage
+  - platform: homeassistant
+    entity_id: sensor.pont_a_celles_daily_original_condition
+    id: weather_daily_condition
+  - platform: homeassistant
+    entity_id: weather.pont_a_celles
+    id: weather_condition
 
 
 display:
@@ -292,6 +303,33 @@ display:
       it.printf(245, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :"); //titre
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
       it.filled_rectangle(50, 125, 380, 2);
+      // Icônes météo mappées aux conditions
+      std::map<std::string, std::string> weather_icon_map {
+      {"sunny", "\U000F0599"},
+      {"cloudy", "\U000F0590"},
+      {"partlycloudy", "\U000F0595"},
+      {"rainy", "\U000F0597"},
+      {"pouring", "\U000F0596"},
+      {"lightning", "\U000F0593"},
+      {"lightning-rainy", "\U000F067E"},
+      {"fog", "\U000F0591"},
+      {"snowy", "\U000F0598"},
+      {"windy", "\U000F059D"},
+      };
+
+      // Récupère la condition météo (text_sensor -> string)
+      std::string condition = id(weather_condition).state.c_str();
+
+      it.print(30, 130, id(mdi36), TextAlign::TOP_LEFT, weather_icon_map[condition].c_str());
+      it.printf(90, 135, id(bold25), TextAlign::TOP_LEFT, "%.1f°C", id(weather_temperature_outside).state);
+
+      // Détails météo
+      it.printf(220, 135, id(book20), TextAlign::TOP_LEFT, "%s", id(weather_daily_condition).state.c_str());
+      it.printf(220, 155, id(book15), TextAlign::TOP_LEFT, "Nuages %.0f%% • Pluie %.1fmm",
+       id(weather_cloud_cover).state,
+       id(weather_precipitation).state);
+      it.printf(220, 170, id(book15), TextAlign::TOP_LEFT, "Humidité %.0f%%", id(weather_humidity).state);
+
       it.filled_rectangle(50, 260, 380, 2);
       it.print(137, 270, id(mdi36), TextAlign::TOP_CENTER, "\U000F1B4C"); // picto pills 
       it.printf(245, 280, id(bold20), TextAlign::TOP_CENTER, "Antiparasitaires :"); //titre
