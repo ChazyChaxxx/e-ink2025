@@ -1,5 +1,9 @@
 esphome:
   name: epaper_minimal
+  on_boot:
+    priority: -10
+    then:
+      - script.execute: update_screen
 
 esp32:
   board: esp32dev
@@ -25,10 +29,16 @@ time:
     id: sntp_time
     timezone: "Europe/Brussels"
     on_time:
-      # 08:00
+      # 07:00
       - seconds: 0
         minutes: 0
-        hours: 8
+        hours: 7
+        then:
+          - script.execute: update_screen
+      # 14:00
+      - seconds: 0
+        minutes: 0
+        hours: 14
         then:
           - script.execute: update_screen
       # 16:00
@@ -61,7 +71,7 @@ font:
     id: book20
     size: 20
     glyphs: &font-glyphs
-      ['!', '"', '%', '(', ')', '+', '=', ',', '-', '_', '.', ':', '°', ' ', '/', "'",
+      ['!', '"', '%', '(', ')', '+', '=', ',', '-', '_', '.', ':', '°', ' ', '/', "'", "•", "&",
       '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
       'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
@@ -100,13 +110,13 @@ font:
     size: 40
     glyphs : *font-glyphs 
   - file: "epaper/GothamRnd-Bold.ttf"
-    id: bold55
-    size: 55
+    id: bold50
+    size: 50
     glyphs: ['.', '°', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'C', '-']
 
   - file: 'epaper/materialdesignicons-webfont.ttf'
-    id: mdi120
-    size: 120
+    id: mdi100
+    size: 100
     glyphs: &mdi-weather-glyphs
       - "\U000F0590" # mdi-weather-cloudy
       - "\U000F0F2F" # mdi-weather-cloudy-alert
@@ -320,8 +330,8 @@ display:
       // Récupère la condition météo (text_sensor -> string)
       std::string condition = id(weather_condition).state.c_str();
 
-      it.print(30, 130, id(mdi36), TextAlign::TOP_LEFT, weather_icon_map[condition].c_str());
-      it.printf(90, 135, id(bold25), TextAlign::TOP_LEFT, "%.1f°C", id(weather_temperature_outside).state);
+      it.print(35, 130, id(mdi100), TextAlign::TOP_LEFT, weather_icon_map[condition].c_str());
+      it.printf(35, 220, id(bold50), TextAlign::TOP_LEFT, "%.1f°C", id(weather_temperature_outside).state);
 
       // Détails météo
       it.printf(220, 135, id(book20), TextAlign::TOP_LEFT, "%s", id(weather_daily_condition).state.c_str());
@@ -333,9 +343,9 @@ display:
       it.filled_rectangle(50, 260, 380, 2);
       it.print(137, 270, id(mdi36), TextAlign::TOP_CENTER, "\U000F1B4C"); // picto pills 
       it.printf(245, 280, id(bold20), TextAlign::TOP_CENTER, "Antiparasitaires :"); //titre
-      it.print(287, 306, id(mdi25), TextAlign::TOP_CENTER, "\U000F13DB"); //picto antipuces
-      it.print(332, 306, id(mdi25), TextAlign::TOP_CENTER, "\U000F082D"); //picto vermifuge
-      it.print(380, 306, id(mdi25), TextAlign::TOP_CENTER, "\U000F0391"); //picto vaccin
+      it.print(287, 308, id(mdi25), TextAlign::TOP_CENTER, "\U000F13DB"); //picto antipuces
+      it.print(332, 308, id(mdi25), TextAlign::TOP_CENTER, "\U000F082D"); //picto vermifuge
+      it.print(380, 308, id(mdi25), TextAlign::TOP_CENTER, "\U000F0391"); //picto vaccin
       it.filled_rectangle(80, 335, 320, 1); // tableau ligne du haut
       it.filled_rectangle(80, 355, 320, 1); // tableau ligne inter horizontale 1
       it.filled_rectangle(80, 375, 320, 1); // tableau ligne inter horizontale 2
@@ -360,14 +370,14 @@ display:
       it.filled_rectangle(50, 405, 380, 2);
       it.print(94, 415, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
       it.printf(240, 425, id(bold20), TextAlign::TOP_CENTER, "Ramassage des déchets :"); //titre
-      it.print(20, 448, id(mdi30), TextAlign::TOP_CENTER, "\U000F1906"); //picto leaf
-      it.print(20, 483, id(mdi30), TextAlign::TOP_CENTER, "\U000F1363"); //picto bottle plastic
-      it.print(260, 448, id(mdi30), TextAlign::TOP_CENTER, "\U000F03D6"); //picto cardboard
-      it.print(260, 483, id(mdi30), TextAlign::TOP_CENTER, "\U000F1873"); //picto glass
-      it.printf(50, 456, id(book20), TextAlign::TOP_LEFT, "%s", id(dechets_organiques_date).state.c_str()); //organique
-      it.printf(50, 490, id(book20), TextAlign::TOP_LEFT, "%s", id(pmc_date).state.c_str()); //pmc
-      it.printf(290, 456, id(book20), TextAlign::TOP_LEFT, "%s", id(carton_date).state.c_str()); //carton
-      it.printf(290, 490, id(book20), TextAlign::TOP_LEFT, "%s", id(verre_date).state.c_str()); //verre
+      it.print(40, 448, id(mdi30), TextAlign::TOP_CENTER, "\U000F1906"); //picto leaf
+      it.print(40, 483, id(mdi30), TextAlign::TOP_CENTER, "\U000F1363"); //picto bottle plastic
+      it.print(275, 448, id(mdi30), TextAlign::TOP_CENTER, "\U000F03D6"); //picto cardboard
+      it.print(275, 483, id(mdi30), TextAlign::TOP_CENTER, "\U000F1873"); //picto glass
+      it.printf(70, 456, id(book20), TextAlign::TOP_LEFT, "%s", id(dechets_organiques_date).state.c_str()); //organique
+      it.printf(70, 490, id(book20), TextAlign::TOP_LEFT, "%s", id(pmc_date).state.c_str()); //pmc
+      it.printf(305, 456, id(book20), TextAlign::TOP_LEFT, "%s", id(carton_date).state.c_str()); //carton
+      it.printf(305, 490, id(book20), TextAlign::TOP_LEFT, "%s", id(verre_date).state.c_str()); //verre
       it.filled_rectangle(50, 530, 380, 2); // ligne horizontale 
       it.print(53, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F0199"); // picto compteurs
       it.printf(240, 550, id(bold20), TextAlign::TOP_CENTER, "Consommations et prod solaire :"); //titre
