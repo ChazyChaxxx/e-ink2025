@@ -296,7 +296,7 @@ display:
     reset_pin: 26
     model: 7.50inV2
     rotation: 270° #Résolution écran 480x800
-    update_interval: 500s
+    update_interval: 1400s
     lambda: |-
       // Tableau des jours en français
       const char* jours_fr[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
@@ -337,15 +337,15 @@ display:
 
       // Détails météo
       // Ligne 1 : tenpérature
-      it.printf(220, 135, id(bold35), TextAlign::TOP_LEFT, "%.1f°C", id(weather_temperature_outside).state);
+      it.printf(220, 130, id(bold35), TextAlign::TOP_LEFT, "%.1f°C", id(weather_temperature_outside).state);
       // Ligne 2 : condition météo
       it.printf(220, 180, id(book20), TextAlign::TOP_LEFT, "%s", id(weather_daily_condition).state.c_str());
       // Ligne 3 : couverture nuageuse
-      it.printf(220, 195, id(book20), TextAlign::TOP_LEFT, "Nuages %.0f%%", id(weather_cloud_cover).state);
+      it.printf(220, 205, id(book20), TextAlign::TOP_LEFT, "Nuages %.0f%%", id(weather_cloud_cover).state);
       // Ligne 4 : pluie
-      it.printf(220, 220, id(book20), TextAlign::TOP_LEFT, "Pluie %.1fmm", id(weather_precipitation).state);
+      it.printf(220, 230, id(book20), TextAlign::TOP_LEFT, "Pluie %.1fmm", id(weather_precipitation).state);
       // Ligne 5 : humidité
-      it.printf(220, 235, id(book20), TextAlign::TOP_LEFT, "Humidité %.0f%%", id(weather_humidity).state);
+      it.printf(220, 255, id(book20), TextAlign::TOP_LEFT, "Humidité %.0f%%", id(weather_humidity).state);
 
       it.filled_rectangle(30, 263, 400, 2); // ligne horizontale
       it.print(137, 270, id(mdi36), TextAlign::TOP_CENTER, "\U000F1B4C"); // picto pills 
@@ -353,16 +353,16 @@ display:
       it.print(287, 307, id(mdi25), TextAlign::TOP_CENTER, "\U000F13DB"); //picto antipuces
       it.print(332, 307, id(mdi25), TextAlign::TOP_CENTER, "\U000F082D"); //picto vermifuge
       it.print(379, 307, id(mdi25), TextAlign::TOP_CENTER, "\U000F0391"); //picto vaccin
-      it.filled_rectangle(310, 265, 80, 1); // tableau ligne du haut au dessus des pictos
+      it.filled_rectangle(265, 305, 135, 1); // tableau ligne du haut au dessus des pictos
       it.filled_rectangle(80, 335, 320, 1); // tableau ligne du haut
       it.filled_rectangle(80, 355, 320, 1); // tableau ligne inter horizontale 1
       it.filled_rectangle(80, 375, 320, 1); // tableau ligne inter horizontale 2
       it.filled_rectangle(80, 395, 320, 1); // tableau ligne du bas
       it.filled_rectangle(80, 335, 1, 60); // tableau ligne cadre ext gauche
-      it.filled_rectangle(265, 310, 1, 85); // tableau ligne vert inter 1
-      it.filled_rectangle(310, 310, 1, 85); // tableau ligne vert inter 2
-      it.filled_rectangle(355, 310, 1, 85); // tableau ligne vert inter 3
-      it.filled_rectangle(400, 310, 1, 85); // tableau ligne cadre ext droite
+      it.filled_rectangle(265, 305, 1, 90); // tableau ligne vert inter 1
+      it.filled_rectangle(310, 305, 1, 90); // tableau ligne vert inter 2
+      it.filled_rectangle(355, 305, 1, 90); // tableau ligne vert inter 3
+      it.filled_rectangle(400, 305, 1, 90); // tableau ligne cadre ext droite
       it.printf(85, 340, id(bold15), TextAlign::TOP_LEFT, "Sushi");
       it.printf(85, 360, id(bold15), TextAlign::TOP_LEFT, "Pepita");
       it.printf(85, 380, id(bold15), TextAlign::TOP_LEFT, "Knacki");
