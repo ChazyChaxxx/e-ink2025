@@ -311,11 +311,11 @@ display:
         time.year);
       it.printf(240, 15, id(bold35), TextAlign::TOP_CENTER, "%s", buffer);
       }
-      it.filled_rectangle(40, 50, 400, 3); // ligne horizontale 
+      it.filled_rectangle(40, 50, 420, 3); // ligne horizontale 
       it.print(155, 60, id(mdi36), TextAlign::TOP_CENTER, "\U000F05F2"); // picto food
       it.printf(245, 70, id(bold20), TextAlign::TOP_CENTER, "Plat du jour :"); //titre
       it.printf(240, 95, id(book20), TextAlign::TOP_CENTER, "%s", id(plat_du_jour).state.c_str());
-      it.filled_rectangle(30, 125, 400, 2);
+      it.filled_rectangle(30, 125, 420, 2); // ligne horizontale
       // Icônes météo mappées aux conditions
       std::map<std::string, std::string> weather_icon_map {
       {"sunny", "\U000F0599"},
@@ -339,15 +339,15 @@ display:
       // Ligne 1 : tenpérature
       it.printf(220, 130, id(bold35), TextAlign::TOP_LEFT, "%.1f°C", id(weather_temperature_outside).state);
       // Ligne 2 : condition météo
-      it.printf(220, 180, id(book20), TextAlign::TOP_LEFT, "%s", id(weather_daily_condition).state.c_str());
+      it.printf(220, 160, id(book20), TextAlign::TOP_LEFT, "%s", id(weather_daily_condition).state.c_str());
       // Ligne 3 : couverture nuageuse
-      it.printf(220, 205, id(book20), TextAlign::TOP_LEFT, "Nuages %.0f%%", id(weather_cloud_cover).state);
+      it.printf(220, 175, id(book20), TextAlign::TOP_LEFT, "Nuages %.0f%%", id(weather_cloud_cover).state);
       // Ligne 4 : pluie
-      it.printf(220, 230, id(book20), TextAlign::TOP_LEFT, "Pluie %.1fmm", id(weather_precipitation).state);
+      it.printf(220, 210, id(book20), TextAlign::TOP_LEFT, "Pluie %.1fmm", id(weather_precipitation).state);
       // Ligne 5 : humidité
-      it.printf(220, 255, id(book20), TextAlign::TOP_LEFT, "Humidité %.0f%%", id(weather_humidity).state);
+      it.printf(220, 235, id(book20), TextAlign::TOP_LEFT, "Humidité %.0f%%", id(weather_humidity).state);
 
-      it.filled_rectangle(30, 263, 400, 2); // ligne horizontale
+      it.filled_rectangle(30, 263, 420, 2); // ligne horizontale
       it.print(137, 270, id(mdi36), TextAlign::TOP_CENTER, "\U000F1B4C"); // picto pills 
       it.printf(245, 280, id(bold20), TextAlign::TOP_CENTER, "Antiparasitaires :"); //titre
       it.print(287, 307, id(mdi25), TextAlign::TOP_CENTER, "\U000F13DB"); //picto antipuces
@@ -375,7 +375,7 @@ display:
       it.printf(287, 380, id(book15), TextAlign::TOP_CENTER, "%.0f", id(anti_puce_knacki).state);
       it.printf(332, 380, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vermifuge_knacki).state);
       it.printf(379, 380, id(book15), TextAlign::TOP_CENTER, "%.0f", id(vaccin_knacki).state);
-      it.filled_rectangle(30, 405, 400, 2);
+      it.filled_rectangle(30, 405, 420, 2);
       it.print(94, 415, id(mdi36), TextAlign::TOP_CENTER, "\U000F0A7A"); // picto poubelle
       it.printf(240, 425, id(bold20), TextAlign::TOP_CENTER, "Ramassage des déchets :"); //titre
       it.print(40, 448, id(mdi30), TextAlign::TOP_CENTER, "\U000F1906"); //picto leaf
@@ -386,7 +386,7 @@ display:
       it.printf(70, 490, id(book20), TextAlign::TOP_LEFT, "%s", id(pmc_date).state.c_str()); //pmc
       it.printf(305, 456, id(book20), TextAlign::TOP_LEFT, "%s", id(carton_date).state.c_str()); //carton
       it.printf(305, 490, id(book20), TextAlign::TOP_LEFT, "%s", id(verre_date).state.c_str()); //verre
-      it.filled_rectangle(30, 530, 400, 2); // ligne horizontale 
+      it.filled_rectangle(30, 530, 420, 2); // ligne horizontale 
       it.print(53, 540, id(mdi36), TextAlign::TOP_CENTER, "\U000F0199"); // picto compteurs
       it.printf(240, 550, id(bold20), TextAlign::TOP_CENTER, "Consommations et prod solaire :"); //titre
       it.printf(50, 585, id(book20), TextAlign::TOP_LEFT, "%.1f litres", id(compteur_d_eau).state);
@@ -396,7 +396,7 @@ display:
       it.printf(50, 647, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(conso_elec_quoti).state);
       it.print(20, 642, id(mdi30), TextAlign::TOP_CENTER, "\U000F140B"); //picto conso elec
       it.printf(50, 670, id(bold15), TextAlign::TOP_LEFT, "%.1f%%", id(pourcentage_autoconso).state);
-      it.printf(96, 671, id(book12), TextAlign::TOP_LEFT, "d'autosuffisance");
+      it.printf(99, 671, id(book12), TextAlign::TOP_LEFT, "d'autosuffisance");
       it.filled_rectangle(240, 575, 2, 120); // ligne verticale pour le tableau
       it.print(355, 567, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A73"); //picto prod solaire
       it.printf(315, 607, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(prod_solaire_jour).state);
@@ -406,7 +406,7 @@ display:
       it.printf(370, 655, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(export_energie).state);
       it.printf(262, 675, id(book12), TextAlign::TOP_LEFT, "autoconsommés");
       it.printf(378, 675, id(book12), TextAlign::TOP_LEFT, "renvoyés");
-      it.filled_rectangle(30, 695, 400, 2); // ligne horizontale qui ferme le tableau
+      it.filled_rectangle(30, 695, 420, 2); // ligne horizontale qui ferme le tableau
       it.print(120, 705, id(mdi36), TextAlign::TOP_CENTER, "\U000F0EFA"); //picto innondation
       it.printf(240, 715, id(bold20), TextAlign::TOP_CENTER, "Puisard de la cave :"); //titre
       it.printf(240, 740, id(book20), TextAlign::TOP_CENTER, "Vidage aujourd'hui : %d", (int)id(compteur_vidage).state);
