@@ -209,6 +209,9 @@ sensor:
     entity_id: sensor.conso_generale_quotidienne_epaper_25
     id: conso_elec_quoti
   - platform: homeassistant
+    entity_id: sensor.energy_production_today_remaining
+    id: prevision_prod_solaire_jour
+  - platform: homeassistant
     entity_id: sensor.elec_epaper_25
     id: import_energie
   - platform: homeassistant
@@ -336,12 +339,12 @@ display:
       it.print(40, 130, id(mdi120), TextAlign::TOP_LEFT, weather_icon_map[condition].c_str());
 
       // Détails météo
-      // Ligne 1 : tenpérature
+      // Ligne 1 : température
       it.printf(220, 130, id(bold35), TextAlign::TOP_LEFT, "%.1f°C", id(weather_temperature_outside).state);
       // Ligne 2 : condition météo
       it.printf(220, 160, id(book20), TextAlign::TOP_LEFT, "%s", id(weather_daily_condition).state.c_str());
       // Ligne 3 : couverture nuageuse
-      it.printf(220, 175, id(book20), TextAlign::TOP_LEFT, "Nuages %.0f%%", id(weather_cloud_cover).state);
+      it.printf(220, 185, id(book20), TextAlign::TOP_LEFT, "Nuages %.0f%%", id(weather_cloud_cover).state);
       // Ligne 4 : pluie
       it.printf(220, 210, id(book20), TextAlign::TOP_LEFT, "Pluie %.1fmm", id(weather_precipitation).state);
       // Ligne 5 : humidité
@@ -400,8 +403,8 @@ display:
       it.filled_rectangle(240, 575, 2, 120); // ligne verticale pour le tableau
       it.print(355, 567, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A73"); //picto prod solaire
       it.printf(315, 607, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(prod_solaire_jour).state);
-      it.print(330, 620, id(mdi30), TextAlign::TOP_CENTER, "\U000F0042");  //picto gauche
-      it.print(370, 620, id(mdi30), TextAlign::TOP_CENTER, "\U000F0043"); //picto droite
+      it.printf(268, 627, id(bold15), TextAlign::TOP_LEFT, "%.1f kWh", id(prevision_prod_solaire_jour).state);
+      it.printf(325, 628, id(book12), TextAlign::TOP_LEFT, "seront encore produits");
       it.printf(265, 655, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(autoconsommation).state);
       it.printf(370, 655, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(export_energie).state);
       it.printf(262, 675, id(book12), TextAlign::TOP_LEFT, "autoconsommés");
