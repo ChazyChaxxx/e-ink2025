@@ -280,9 +280,6 @@ text_sensor:
     entity_id: sensor.dechets_organiques
     id: dechets_organiques_date
   - platform: homeassistant
-    entity_id: sensor.date_dernier_vidage_de_la_cave
-    id: dernier_vidage
-  - platform: homeassistant
     entity_id: sensor.pont_a_celles_daily_original_condition
     id: weather_daily_condition
   - platform: homeassistant
@@ -398,13 +395,13 @@ display:
       it.print(20, 609, id(mdi30), TextAlign::TOP_CENTER, "\U000F1A1B"); //picto gaz
       it.printf(50, 647, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(conso_elec_quoti).state);
       it.print(20, 642, id(mdi30), TextAlign::TOP_CENTER, "\U000F140B"); //picto conso elec
-      it.printf(50, 670, id(bold15), TextAlign::TOP_LEFT, "%.1f%%", id(pourcentage_autoconso).state);
+      it.printf(92, 670, id(bold15), TextAlign::TOP_RIGHT, "%.1f%%", id(pourcentage_autoconso).state);
       it.printf(99, 671, id(book12), TextAlign::TOP_LEFT, "d'autosuffisance");
       it.filled_rectangle(240, 575, 2, 120); // ligne verticale pour le tableau
       it.print(355, 567, id(mdi36), TextAlign::TOP_CENTER, "\U000F1A73"); //picto prod solaire
       it.printf(315, 607, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(prod_solaire_jour).state);
-      it.printf(268, 627, id(bold15), TextAlign::TOP_LEFT, "%.1f kWh", id(prevision_prod_solaire_jour).state);
-      it.printf(325, 628, id(book12), TextAlign::TOP_LEFT, "seront encore produits");
+      it.printf(321, 627, id(bold15), TextAlign::TOP_RIGHT, "%.1f kWh", id(prevision_prod_solaire_jour).state);
+      it.printf(327, 628, id(book12), TextAlign::TOP_LEFT, "seront encore produits");
       it.printf(265, 655, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(autoconsommation).state);
       it.printf(370, 655, id(book20), TextAlign::TOP_LEFT, "%.1f kWh", id(export_energie).state);
       it.printf(262, 675, id(book12), TextAlign::TOP_LEFT, "autoconsommés");
@@ -413,6 +410,6 @@ display:
       it.print(120, 705, id(mdi36), TextAlign::TOP_CENTER, "\U000F0EFA"); //picto innondation
       it.printf(240, 715, id(bold20), TextAlign::TOP_CENTER, "Puisard de la cave :"); //titre
       it.printf(240, 740, id(book20), TextAlign::TOP_CENTER, "Vidage aujourd'hui : %d", (int)id(compteur_vidage).state);
-      it.printf(240, 764, id(book12), TextAlign::TOP_CENTER, "Dernier vidage : %s", id(dernier_vidage).state.c_str());
-      it.printf(250, 787, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
-      it.strftime(255, 787, id(bold15), TextAlign::TOP_LEFT, "%d-%m-%Y %H:%M", id(sntp_time).now());
+      it.printf(250, 770, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
+      it.strftime(255, 770, id(bold15), TextAlign::TOP_LEFT, "%d-%m-%Y %H:%M", id(sntp_time).now());
+      it.printf(240, 785, id(book12), TextAlign::TOP_CENTER, "Version 3.0 - octobre 2025");
