@@ -1,6 +1,7 @@
 # 📟 Projet ESPHome - Afficheur e-Paper 480x800
 
 Ce projet permet d’afficher diverses informations issues de **Home Assistant** sur un écran **e-Paper Waveshare 7.5" (résolution 480x800)**, connecté via **ESPHome**.
+![Aperçu du projet](https://i.imgur.com/fGrRHZi.png)
 
 ## 🚀 Fonctionnalités
 
