@@ -188,7 +188,7 @@ font:
     
 sensor:
   - platform: homeassistant
-    entity_id: sensor.mokip_outdoor_temperature
+    entity_id: sensor.pont_a_celles_temperature
     id: weather_temperature_outside
   - platform: homeassistant
     entity_id: sensor.mokip_zone_zone_1_circuit_0_current_temperature
@@ -412,4 +412,4 @@ display:
       it.printf(240, 740, id(book20), TextAlign::TOP_CENTER, "Vidage aujourd'hui : %d", (int)id(compteur_vidage).state);
       it.printf(250, 770, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
       it.strftime(255, 770, id(bold15), TextAlign::TOP_LEFT, "%d-%m-%Y %H:%M", id(sntp_time).now());
-      it.printf(240, 785, id(book12), TextAlign::TOP_CENTER, "Version 3.0 - octobre 2025");
+      it.printf(240, 785, id(book12), TextAlign::TOP_CENTER, "Version 3.1.0 - octobre 2025");
