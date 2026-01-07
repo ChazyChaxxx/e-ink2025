@@ -78,7 +78,7 @@ font:
       '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
       'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-      'é', 'à', 'è', 'ç', 'ù', 'ö', 'É', 'À', 'È', 'Ç', 'Ù']
+      'é', 'à', 'â', 'è', 'ç', 'ù', 'ö', 'É', 'À', 'È', 'Ç', 'Ù']
   - file: "epaper/GothamRnd-Book.ttf"
     id: book15
     size: 15
@@ -200,7 +200,7 @@ sensor:
     entity_id: sensor.compteur_d_eau
     id: compteur_d_eau
   - platform: homeassistant
-    entity_id: sensor.kiosk_fusion_solar_2025_0pi5kpb8ji7853vmxnvqzlzfkzi0qqur_total_current_day_energy
+    entity_id: sensor.kiosk_fusion_solar_2026_hallcljkuv90ke7gerpvg5k3fid0kiyl_total_current_day_energy
     id: prod_solaire_jour
   - platform: homeassistant
     entity_id: sensor.gazmeter_epaper_25
@@ -296,7 +296,7 @@ display:
     reset_pin: 26
     model: 7.50inV2
     rotation: 270° #Résolution écran 480x800
-    update_interval: 1400s
+    update_interval: 1500s
     lambda: |-
       // Tableau des jours en français
       const char* jours_fr[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
@@ -412,4 +412,4 @@ display:
       it.printf(240, 740, id(book20), TextAlign::TOP_CENTER, "Vidage aujourd'hui : %d", (int)id(compteur_vidage).state);
       it.printf(250, 770, id(bold15), TextAlign::TOP_RIGHT, "Infos mises à jour : ");
       it.strftime(255, 770, id(bold15), TextAlign::TOP_LEFT, "%d-%m-%Y %H:%M", id(sntp_time).now());
-      it.printf(240, 785, id(book12), TextAlign::TOP_CENTER, "Version 3.1.0 - octobre 2025");
+      it.printf(240, 785, id(book12), TextAlign::TOP_CENTER, "Version 3.2.0 - janvier 2026");
